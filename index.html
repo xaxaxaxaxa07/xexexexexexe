@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)http://localhost:63342/random_number_bot/1.html?_ijt=c7ak02qdbet21amm113fo5k7t2&_ij_reload=RELOAD_ON_SAVE -->
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пятигорск — Туристический портал</title>
+
+    <!-- Подключение шрифта Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <style>
+        /*
+           ---------------------------------------
+           Базовые стили и переменные
+           ---------------------------------------
+           Цветовая палитра сохранена с примера:
+           Основной цвет: #6C63FF (фиолетовый)
+           Дополнительный цвет: #FFD700 (золотой)
+           Акценты: #00BFFF (голубой), #FF6347 (помидор)
+           Фоновые цвета: #F5F5F5 (светло-серый), #FFFFFF (белый)
+           Текстовые цвета: #2D2D2D (темно-серый), #555555 (серый)
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #2D2D2D;
+            background: #ffedc6;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {ы
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #996a24;
+        }
+
+        :root {
+            --primary-color: #b18c55;
+            --secondary-color: #996a24;
+            --accent-color1: #f3c384;
+            --accent-color2: #f7c686;
+            --light-bg: #f7deb8;
+            --white: #0000002f;
+            --dark-text: #000000;
+            --medium-text: #000000;
+            --border-color: #ffffff;
+            --transition-speed: 0.3s;
+        }
+
+        /* Анимации и эффекты */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hover-zoom {
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .hover-zoom:hover {
+            transform: scale(1.05);
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: box-shadow var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+        }
+
+        /* ---------------------------------------
+           HEADER
+           --------------------------------------- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3%;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .logo:hover {
+            transform: rotate(10deg);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav ul li a {
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        nav ul li a.active::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        /* ---------------------------------------
+           HERO SECTION
+           --------------------------------------- */
+        .hero {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 8rem 3%;
+            background: var(--light-bg);
+            gap: 1.5rem;
+            overflow: hidden;
+            min-height: 100vh;
+        }
+
+        #hero-3d-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50vw;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero__content {
+            max-width: 600px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s forwards;
+            opacity: 0;
+        }
+
+        .hero__content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.2s;
+        }
+
+        .hero__content p {
+            font-size: 1.2rem;
+            color: var(--medium-text);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero__btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.6s;
+        }
+
+        .hero__btn:hover {
+            background: #5848c2;
+            transform: translateY(-2px);
+        }
+
+        .hero__btn i {
+            margin-left: 0.5rem;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .hero__btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ---------------------------------------
+           ДОСТОПРИМЕЧАТЕЛЬНОСТИ
+           --------------------------------------- */
+        .attractions {
+            padding: 4rem 3%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .attractions h2 {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .attractions__filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .attractions__filter select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: border var(--transition-speed) ease;
+        }
+
+        .attractions__filter select:focus {
+            border-color: var(--primary-color);
+        }
+
+        .attractions__list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .attraction-card {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .attraction-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .attraction-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .attraction-card p {
+            font-size: 1rem;
+            color: var(--medium-text);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .attraction-card .info {
+            font-size: 0.9rem;
+            color: var(--medium-text);
+            line-height: 1.4;
+        }
+
+        /* ---------------------------------------
+           ОПТИМАЛЬНЫЙ МАРШРУТ
+           --------------------------------------- */
+        .route-planner {
+            padding: 4rem 3%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: var(--light-bg);
+            border-radius: 8px;
+        }
+
+        .route-planner h2 {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .route-planner p {
+            color: var(--medium-text);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .route-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .route-form select,
+        .route-form input {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border var(--transition-speed) ease;
+        }
+
+        .route-form select:focus,
+        .route-form input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .route-form button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .route-form button:hover {
+            background: #b98f50;
+            transform: translateY(-2px);
+        }
+
+        .route-result {
+            text-align: left;
+            color: var(--medium-text);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* ---------------------------------------
+           ЧАТ-БОТ
+           --------------------------------------- */
+        .chatbot {
+            padding: 4rem 3%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chatbot h2 {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .chatbot p {
+            color: var(--medium-text);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .chat-container {
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+
+        .chat-messages {
+            min-height: 200px;
+            margin-bottom: 1rem;
+            overflow-y: auto;
+        }
+
+        .message {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .message.bot {
+            background: #fcdfba;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .chat-input input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .chat-input button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease;
+        }
+
+        .chat-input button:hover {
+            background: #ebbc95;
+        }
+
+        /* ---------------------------------------
+           КОНТАКТЫ и FAQ
+           --------------------------------------- */
+        .contacts {
+            padding: 4rem 3%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contacts h2 {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            color: var(--medium-text);
+            line-height: 1.8;
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border var(--transition-speed) ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .contact-form button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease, transform var(--transition-speed) ease;
+        }
+
+        .contact-form button:hover {
+            background: #e7c195;
+            transform: translateY(-2px);
+        }
+
+        .faq {
+            padding: 4rem 3%;
+            background: var(--light-bg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            font-size: 2rem;
+            color: var(--dark-text);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faq__item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+            cursor: pointer;
+            transition: background var(--transition-speed) ease;
+        }
+
+        .faq__item:hover {
+            background: #f0f0f0;
+        }
+
+        .faq__item h3 {
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-weight: 600;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        .faq__item h3:hover {
+            color: var(--accent-color1);
+        }
+
+        .faq__item h3::after {
+            content: "\f078"; /* Font Awesome chevron-down */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .faq__item.open h3::after {
+            transform: rotate(180deg);
+        }
+
+        .faq__item p {
+            font-size: 1rem;
+            color: var(--medium-text);
+            margin-top: 0.5rem;
+            display: none;
+            line-height: 1.8;
+        }
+
+        .faq__item.open p {
+            display: block;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        /* ---------------------------------------
+           FOOTER
+           --------------------------------------- */
+        footer {
+            padding: 3rem 3%;
+            border-top: 1px solid var(--border-color);
+            background: var(--white);
+            animation: fadeInUp 1s forwards;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+            color: var(--medium-text);
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 6rem 3%;
+            }
+            .hero__content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 4rem 3%;
+            }
+
+            .hero__content h1 {
+                font-size: 2rem;
+            }
+
+            .hero__btn {
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .attractions__list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<img class="safum-vpn-status" id="kfnpmnanpmbomdbolkkjbjmonlebhlcl-img" src="chrome-extension://kfnpmnanpmbomdbolkkjbjmonlebhlcl/web_accessible_resources/status_on.png" alt="status"><body data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
+    <!--
+        ---------------------------------------
+        HEADER
+        ---------------------------------------
+        Комментарий: В шапке можно менять логотип и пункты меню.
+        Секции меню:
+        - Главная
+        - Достопримечательности
+        - Маршрут
+        - Чат-бот
+        - Контакты
+        - Кафе
+    -->
+    <header class="fade-in">
+        <div class="logo">Родной город</div>
+        <nav>
+            <ul>
+                <li><a href="#top" class="active">Главная</a></li>
+                <li><a href="#attractions">Достопримечательности</a></li>
+                <li><a href="#route-planner">Маршрут</a></li>
+                <li><a href="#chatbot">Чат-бот</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+                <li><a href="#faq">Кафе</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--
+        ---------------------------------------
+        HERO
+        ---------------------------------------
+        Комментарий: Здесь стоит заменить фоновую картинку или 3D-сцену под тематику Пятигорска.
+        Можно обновить текст на актуальный для туристического портала.
+    -->
+    <section class="hero fade-in" id="top">
+        <canvas id="hero-3d-canvas" width="796" height="754" style="width: 796px; height: 754px;"></canvas>
+        <div class="hero__content aos-init aos-animate" data-aos="fade-up">
+            <h1>Пятигорск - красочный город Кавказских Минеральных Вод</h1>
+            <p>Посмотрите на прекрасные виды нашего города Пятигорска и почувствуйте уютные места</p>
+            <p><strong>Собираетесь с семьёй, друзьями и близкими людьми в увлекательное путешествие </strong></p>
+            <a href="http://localhost:63342/random_number_bot/1.html?_ijt=c7ak02qdbet21amm113fo5k7t2&amp;_ij_reload=RELOAD_ON_SAVE#attractions" class="hero__btn hover-zoom">Посмотреть <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <!DOCTYPE html>
+        <html lang="ru">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Видео о Пятигорске</title>
+        </head>
+        <body>
+            <h1>Добро пожаловать в Пятигорск!</h1>
+            <p>Насладитесь нашем фото о достопримечательностях и красоте Пятигорска.</p>
+        
+            <img src="https://a.d-cd.net/p0AAAgDy9OA-1920.jpg" alt="">
+        
+            <p></p>
+        </body>
+        </html>
+        
+    </section>
+
+    <!--
+        ---------------------------------------
+        ДОСТОПРИМЕЧАТЕЛЬНОСТИ
+        ---------------------------------------
+        Комментарий: Здесь можно заменить изображения и описания на реальные.
+        Для смены картинок: обновить src в блоках .attraction-card.
+        В фильтре добавить категории: "Все", "Природные", "Культурные", "Исторические".
+    -->
+    <section class="attractions fade-in aos-init" id="attractions" data-aos="fade-up">
+        <h2>Достопримечательности Пятигорска</h2>
+        <div class="attractions__filter aos-init" data-aos="fade-up" data-aos-delay="100">
+            <!-- Комментарий: Здесь можно реализовать реальную фильтрацию через JS. -->
+            <select id="attraction-filter">
+                <option value="all">Все</option>
+                <option value="natural">Природные</option>
+                <option value="cultural">Культурные</option>
+                <option value="historical">Исторические</option>
+            </select>
+        </div>
+
+        <div class="attractions__list aos-init" data-aos="fade-up" data-aos-delay="200" id="attraction-list">
+            <!-- Пример карточек достопримечательностей -->
+            <!-- Комментарий: Заменить ссылки на реальные фото достопримечательностей. -->
+            <div class="attraction-card card hover-zoom" data-type="natural">
+                <img src="https://avatars.mds.yandex.net/i?id=65aed29c97033db142beea10674fc06aebf0f430-4476638-images-thumbs&n=13" alt="Гора Машук">
+                <h3>Гора Машук</h3>
+                <p>Горная вершина, откуда открывается панорамный вид на город и окрестности.</p>
+                <p class="info">Часы работы: круглосуточно<br>Билеты: подъем на канатной дороге ~300 руб.<br>Адрес: центр города</p>
+            </div>
+            <div class="attraction-card card hover-zoom" data-type="natural">
+                <img src="https://avatars.mds.yandex.net/i?id=6e77ce1fa3db1197be598e860d14c2deca060ae4-5440551-images-thumbs&n=13" alt="Минеральные источники">
+                <h3>Минеральные источники</h3>
+                <p>Знаменитые лечебные воды, доступные в бюветах и источниках.</p>
+                <p class="info">Часы работы: 8:00 - 20:00<br>Билеты: бесплатно<br>Адрес: парк «Цветник»</p>
+            </div>
+            <div class="attraction-card card hover-zoom" data-type="cultural">
+                <img src="https://avatars.mds.yandex.net/i?id=47c116b2051c597d9682e02f77c3bfed31ce72b68393d48d-10503674-images-thumbs&n=13" alt="Парк Цветник">
+                <h3>Парк Цветник</h3>
+                <p>Исторический парк с клумбами, скульптурами и кафе, место отдыха горожан.</p>
+                <p class="info">Часы работы: 8:00 - 22:00<br>Билеты: бесплатно<br>Адрес: ул. Буачидзе, центр</p>
+            </div>
+            <div class="attraction-card card hover-zoom" data-type="historical">
+                <img src="https://avatars.mds.yandex.net/i?id=4ed8cf2ec809e94f01110b475adfbad9_l-5347526-images-thumbs&n=13" alt="Лермонтовская Галерея">
+                <h3>Лермонтовские места</h3>
+                <p>Места, связанные с жизнью и творчеством М.Ю. Лермонтова (дом-музей, памятник).</p>
+                <p class="info">Часы работы: 10:00 - 18:00<br>Билеты: от 100 руб.<br>Адрес: Лермонтовская ул.</p>
+            </div>
+            <div class="attraction-card card hover-zoom" data-type="cultural">
+                <img src="https://media.1777.ru/images/images_processing/766/7668500439111891.jpeg" alt="Канатная дорога">
+                <h3>Канатная дорога</h3>
+                <p>Живописный подъем на гору Машук по канатной дороге.</p>
+                <p class="info">Часы работы: 9:00 - 20:00<br>Билеты: ~300 руб.<br>Адрес: у подножия Машука</p>
+            </div>
+        </div> </div>
+        <div class="attraction-card card hover-zoom" data-type="cultural">
+            <img src="https://mashuk-tour.ru/wp-content/uploads/2020/12/0431400b-8fb9-4e96-8d14-28cf5fbdfe78.jpg" alt="Скульптура Орел">
+            <h3>Скульптура Орел</h3>
+            <p>Исключительность горы, с которой взирает бронзовый орел, в том, что она образована из осадочных пород горячих минеральных источников, что редкость для нашей планеты. Горячая положила начало Пятигорску как городу-курорту.</p>
+            <p class="info">
+            <br>Адрес: В парке цветник</p>
+        </div>:
+
+    </section>
+
+    <!--
+        ---------------------------------------
+        ОПТИМАЛЬНЫЙ МАРШРУТ
+        ---------------------------------------
+        Комментарий: Здесь можно через JS сымитировать подбор маршрута на основе вводимых предпочтений.
+        При реальной интеграции можно писать код в JS-скрипте ниже.
+    -->
+    <section class="route-planner fade-in aos-init" id="route-planner" data-aos="fade-up">
+        <h2>Оптимальный маршрут</h2>
+        <p>Укажите ваши предпочтения, и мы предложим вам оптимальный маршрут для знакомства с Пятигорском.</p>
+        <form class="route-form aos-init" id="route-form" data-aos="fade-up" data-aos-delay="100">
+            <select name="type" required="">
+                <option value="">Тип достопримечательностей</option>
+                <option value="natural">Природные</option>
+                <option value="cultural">Культурные</option>
+                <option value="historical">Исторические</option>
+            </select>
+            <input type="number" name="budget" placeholder="Бюджет (руб.)" required="">
+            <input type="number" name="days" placeholder="Количество дней" required="">
+            <select name="transport" required="">
+                <option value="">Удобный транспорт</option>
+                <option value="foot">Пешком</option>
+                <option value="taxi">Такси</option>
+                <option value="bus">Общественный транспорт</option>
+            </select>
+            <button type="submit">Подобрать маршрут</button>
+        </form>
+        <div class="route-result aos-init" id="route-result" data-aos="fade-up" data-aos-delay="200">
+            <!-- Здесь будет показан результат (маршрут) после расчета через JS -->
+        </div>
+    </section>
+
+    <!--
+        ---------------------------------------
+        ЧАТ-БОТ
+        ---------------------------------------
+        Комментарий: Здесь можно подключить реальный API, например GPT.
+        В данном демо-версии используем статические ответы.
+        В JS-коде ниже указано, где подключить API.
+    -->
+    <section class="chatbot fade-in aos-init" id="chatbot" data-aos="fade-up">
+        <h2>Чат-бот</h2>
+        <p>Задайте свой вопрос о Пятигорске, достопримечательностях или маршруте.</p>
+        <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+                <!-- Здесь отображаются сообщения. -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chat-input" placeholder="Введите вопрос...">
+                <button id="chat-send">Отправить</button>
+            </div>
+        </div>
+        <!-- Комментарий: Для подключения реального GPT API, найдите код в блоке JS и добавьте запрос к API. -->
+    </section>
+
+    <!--
+        ---------------------------------------
+        КОНТАКТЫ
+        ---------------------------------------
+    -->
+    <section class="contacts fade-in aos-init" id="contacts" data-aos="fade-up">
+        <h2>Контакты</h2>
+        <div class="contact-info">
+            <p>Адрес: г. Пятигорск, ул. Примерная, д. 1</p>
+            <p>E-mail: <a href="mailto:info@visit-pyatigorsk.ru">info@visit-pyatigorsk.ru</a></p>
+            <p>Телефон: <a href="tel:+79097610759 и +79097503127">+79097610759 и +79097503127</a></p>
+            <p>Социальные сети: <a href="http://localhost:63342/random_number_bot/1.html?_ijt=c7ak02qdbet21amm113fo5k7t2&amp;_ij_reload=RELOAD_ON_SAVE#">VK</a>, <a href="http://localhost:63342/random_number_bot/1.html?_ijt=c7ak02qdbet21amm113fo5k7t2&amp;_ij_reload=RELOAD_ON_SAVE#">Instagram</a></p>
+        </div>
+        <form class="contact-form card aos-init" data-aos="fade-up" data-aos-delay="100">
+            <input type="text" placeholder="Ваш телефон или e-mail" required="">
+            <textarea placeholder="Ваш вопрос или сообщение" rows="4" required=""></textarea>
+            <button type="submit">Отправить</button>
+            <p class="note">Нажимая на кнопку, вы соглашаетесь с обработкой персональных данных.</p>
+        </form>
+    </section>
+
+    <!--
+        ---------------------------------------
+        Кофейни Пятигорска
+        ---------------------------------------
+        Комментарий: Кофейня Пятигорска
+        
+
+    -->
+    <section class="faq fade-in aos-init" id="faq" data-aos="fade-up">
+        <h2>Кафе и рестораны</h2>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="https://fb.ru/misc/i/gallery/44146/1663996.jpg" alt="Санта-Фе">
+            <h3>Санта-Фе</h3>
+            <p>Кафе европейской и японской кухни. Насладитесь уютной атмосферой заведения. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:Пятигорск, пр-т Кирова 69 / Малыгина 34</p>
+            
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="https://avatars.mds.yandex.net/get-altay/5548986/2a000001841ad3754a35a2078308f1cbbdd9/XXL" alt="Этно кофе">
+            <h3>Этно кофе</h3>
+            <p>Это место, где вы можете насладиться разнообразными видами кофе, такими как «Айс кофе урбеч» и «Раф с урбечем», а также попробовать вкусные десерты, такие как «Бамбл» и «Клубника в шоколаде». </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:
+                Ставропольский край, Пятигорск, проспект Кирова</p>
+            
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="https://avatars.mds.yandex.net/get-altay/10812365/2a0000018c0af3e6ce61b74919c84c68e412/XXL_height" alt="Paper Cup">
+            <h3>Paper Cup</h3>
+            <p> это уютное место, где можно насладиться ароматным кофе и вкусными десертами по доступным ценам. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:
+               
+просп. 40 лет Октября, 91, Пятигорск</p>
+            
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="https://avatars.mds.yandex.net/i?id=e0a288d5d3d09f8680c1330df941d839468edf7b-8497057-images-thumbs&n=13" alt="Merci">
+            <h3>Merci</h3>
+            <p> это место, где вы можете позавтракать, пообедать или провести вечер в компании. В меню представлены блюда европейской кухни, такие как паста с курицей и лисичками, а также свежие десерты, такие как чизкейки и сырники. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:
+               
+                Октябрьская ул., 42, Пятигорск
+            </p>
+            
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="https://avatars.mds.yandex.net/get-altay/9114271/2a0000018ffdd2f403bb9c047b68d651e6af/XXXL" alt="Печорин">
+            <h3>Печорин</h3>
+            <p>  это стилизованное под XIX век заведение с двумя залами: основным с фортепьяно и летней верандой с более легкой музыкой. Интерьер ресторана выполнен с учетом культурных традиций, а на столах можно найти томики с произведениями Лермонтова. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:
+               
+                просп. Кирова, 25А, Пятигорск
+
+            </p>
+            
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="data:image/jpeg;base64,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" alt="smelo">
+            <h3>smelo</h3>
+            <p> smelo — ресторан с пекарней ремесленного хлеба в культовой локации Пятигорска. Основная концепция меню — комфортная современная еда на каждый день из локальных фермерских продуктов. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:Просп. 40 лет Октября, 62а, Пятигорск</p>
+        </div>
+        <div class="attraction-card card hover-zoom" data-type="natural">
+            <img src="data:image/png;base64,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" alt="Кухни мира">
+            <h3>Кухни мира</h3>
+            <p> «Кухни Мира» — это фуд-корт, где представлены блюда разных национальных кухонь. </p>
+            <p class="info">Часы работы: круглосуточно<br>Вход бесплатный<br>Адрес:г.Пятигорск, ул.Леваневского, д.3</p>
+        </div>
+    </section>
+
+    <!--
+        ---------------------------------------
+        FOOTER
+        ---------------------------------------
+    -->
+    <footer class="fade-in">
+        <p>2024 © Туристический портал Пятигорска</p>
+        <p>Все права защищены. Информация предназначена для планирования туристических поездок.</p>
+    </footer>
+
+    <!-- Подключение библиотек JS -->
+    <script src="./Пятигорск — Туристический портал_files/three.min.js.загрузка"></script>
+    <script src="./Пятигорск — Туристический портал_files/OrbitControls.min.js.загрузка"></script>
+    <script src="./Пятигорск — Туристический портал_files/aos.js.загрузка"></script>
+
+    <script>
+        // -----------------------------------
+        // Инициализация AOS анимаций
+        // -----------------------------------
+        AOS.init({
+            duration: 1000,
+            once: true,
+        });
+
+        // -----------------------------------
+        // FAQ раскрытие
+        // -----------------------------------
+        document.querySelectorAll('.faq__item').forEach(item => {
+            const question = item.querySelector('h3');
+            question.addEventListener('click', () => {
+                item.classList.toggle('open');
+            });
+        });
+
+        // -----------------------------------
+        // Фильтрация достопримечательностей
+        // -----------------------------------
+        const filterSelect = document.getElementById('attraction-filter');
+        const attractionCards = document.querySelectorAll('.attraction-card');
+
+        filterSelect.addEventListener('change', () => {
+            const value = filterSelect.value;
+            attractionCards.forEach(card => {
+                if (value === 'all' || card.dataset.type === value) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // -----------------------------------
+        // Логика подбора маршрута (демо)
+        // -----------------------------------
+        const routeForm = document.getElementById('route-form');
+        const routeResult = document.getElementById('route-result');
+
+        routeForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(routeForm);
+            const type = formData.get('type');
+            const budget = formData.get('budget');
+            const days = formData.get('days');
+            const transport = formData.get('transport');
+
+            // Пример простой логики: выведем статический текст в зависимости от типа
+            let resultText = `Оптимальный маршрут для вас: \n`;
+            if (type === 'natural') {
+                resultText += `1. Подъем на гору Машук\n2. Посещение минеральных источников`;
+            } else if (type === 'cultural') {
+                resultText += `1. Прогулка по парку «Цветник»\n2. Посещение канатной дороги`;
+            } else if (type === 'historical') {
+                resultText += `1. Лермонтовские места\n2. Прогулка по историческому центру`;
+            }
+
+            resultText += `\n\nБюджет: ~${budget} руб.\nДней: ${days}\nТранспорт: ${transport}`;
+            routeResult.textContent = resultText;
+        });
+
+        // -----------------------------------
+        // Чат-бот (демо)
+        // -----------------------------------
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatMessages = document.getElementById('chat-messages');
+
+        // Статический пример ответа бота
+        function botReply(msg) {
+            const botMessage = document.createElement('div');
+            botMessage.classList.add('message', 'bot');
+            // Демоверсия: статический ответ.
+            // Здесь можно подключить реальный API (например GPT) через fetch-запрос.
+            // Пример:
+            // fetch('URL_ВАШЕГО_API', {method: 'POST', body: JSON.stringify({prompt: msg})})
+            //   .then(res => res.json())
+            //   .then(data => { botMessage.textContent = data.answer; });
+            botMessage.textContent = `Бот: Рекомендую посетить парк «Цветник»!`;
+            chatMessages.appendChild(botMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        chatSend.addEventListener('click', () => {
+            const userText = chatInput.value.trim();
+            if (userText !== '') {
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('message');
+                userMessage.textContent = `Вы: ${userText}`;
+                chatMessages.appendChild(userMessage);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatInput.value = '';
+
+                // Имитация ответа бота
+                setTimeout(() => {
+                    botReply(userText);
+                }, 500);
+            }
+        });
+
+        // -----------------------------------
+        // 3D-анимация в HERO (демо)
+        // -----------------------------------
+        const canvas = document.getElementById('hero-3d-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        camera.position.set(0, 1.5, 3);
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.enablePan = false;
+        controls.minDistance = 2;
+        controls.maxDistance = 5;
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
+
+        // Пример 3D-объекта (можно заменить моделью горы или символом города)
+        const geometry = new THREE.TorusKnotGeometry(0.6, 0.2, 100, 16);
+        const material = new THREE.MeshStandardMaterial({ color: 0x6C63FF, metalness: 0.6, roughness: 0.4 });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            torusKnot.rotation.x += 0.005;
+            torusKnot.rotation.y += 0.005;
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        });
+    </script>
+
+
+<script>
+(function() {
+  var ws = new WebSocket('ws://' + window.location.host + 
+             '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+             'referrer=' + encodeURIComponent(window.location.pathname));
+  ws.onmessage = function (msg) {
+      if (msg.data === 'reload') {
+          window.location.reload();
+      }
+      if (msg.data.startsWith('update-css ')) {
+          var messageId = msg.data.substring(11);
+          var links = document.getElementsByTagName('link');
+          for (var i = 0; i < links.length; i++) {
+              var link = links[i];
+              if (link.rel !== 'stylesheet') continue;
+              var clonedLink = link.cloneNode(true);
+              var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+              if (newHref !== link.href) {
+                clonedLink.href = newHref;
+              }
+              else {
+                var indexOfQuest = newHref.indexOf('?');
+                if (indexOfQuest >= 0) {
+                  // to support ?foo#hash 
+                  clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' + 
+                                    newHref.substring(indexOfQuest + 1);
+                }
+                else {
+                  clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                }
+              }
+              link.replaceWith(clonedLink);
+          }
+      }
+  };
+})();
+</script></body></html>
